@@ -1,0 +1,47 @@
+body {
+    background-color: black;
+}
+
+#message-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+}
+
+#form {
+    /* position: fixed; */
+    padding-top: 50px;
+}
+
+#message-container>p {
+    width: fit-content;
+    display: flex;
+    margin: 4px;
+    background-color: aquamarine;
+    border-radius: 7px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: gray;
+    padding-right: 5px;
+    padding-left: 5px;
+    animation-duration: 600ms;
+    animation-name: fadeIn;
+    position: relative;
+}
+
+@keyframes fadeIn {
+    0%   {opacity: 0%;}
+    100% {opacity: 100%;}
+}
+
+.center {
+    text-align: center;
+}
+
+#online-users {
+
+}
+
+#online-users>p{
+    
+}
