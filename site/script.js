@@ -11,7 +11,7 @@ function loadFile(filePath) {
     return result;
 }
 
-localIP = loadFile('ip.txt');
+localIP = loadFile('ip.txt').split('\n')[0];
 
 const socket = io(`ws://${localIP}:3000`);
 localStorage.debug = 'socket.io-client:socket'
