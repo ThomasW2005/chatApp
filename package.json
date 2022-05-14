@@ -4,8 +4,9 @@
   "description": "Simple Chat-App using Espress and Socket.io",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+    "test": "node .",
+    "stop": "pkill --signal SIGINT myApp"
+},
   "keywords": [
     "express",
     "socket.io",

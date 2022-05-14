@@ -1,5 +1,5 @@
 localIP = '1.1.1.1'
-
+wsPort = '3001'
 function loadFile(filePath) {
     var result = null;
     var xmlhttp = new XMLHttpRequest();
@@ -13,7 +13,7 @@ function loadFile(filePath) {
 
 localIP = loadFile('ip.txt').split('\n')[0];
 
-const socket = io(`ws://${localIP}:3000`);
+const socket = io(`ws://${localIP}:${wsPort}`);
 localStorage.debug = 'socket.io-client:socket'
 const mC = document.getElementById("message-container");
 const input = document.getElementById("input");
