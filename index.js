@@ -5,8 +5,8 @@ const wsPort = 3001
 const httpPort = 80
 const mdnsPort = 5353
 
+const { exec } = require("child_process");
 const express = require('express')
-const fs = require('fs')
 const app = express()
 const io = require("socket.io")(wsPort, {
     cors: {
@@ -26,16 +26,23 @@ instrument(io, {
     auth: false
 });
 
-fs.readFile('site/ip.txt', 'utf8', (err, data) => {
-    if (err) {
-        console.error(err)
-        return
+exec("ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1 -d'/'", (error, stdout, stderr) => {
+    if (error) {
+        console.error(`exec error: ${error}`);
+        return;
     }
-    localIP = data.split('\n')[0]
-    localIPv6 = data.split('\n')[1]
-    console.log(`host ip: ${localIP}`)
-    console.log(`host ipv6: ${localIPv6}`)
-})
+    localIP = stdout.trim()
+    console.log(`local ip: ${localIP}`)
+});
+
+exec("ip addr | grep 'state UP' -A4 | tail -n1 | awk '{print $2}' | cut -f1 -d'/'", (error, stdout, stderr) => {
+    if (error) {
+        console.error(`exec error: ${error}`);
+        return;
+    }
+    localIP = stdout.trim()
+    console.log(`local ip: ${localIP}`)
+});
 
 mdns.on('query', query => {
     if (query.questions[0]?.name === 'htlchat.local') {
@@ -61,6 +68,14 @@ io.on("connection", socket => {
     socket.on("broadcast-name", () => {
         socket.broadcast.emit("client-connected", socket.nickname)
     })
+})
+
+app.get('/api/ip', (req, res) => {
+    res.send(localIP)
+})
+
+app.get('/api/ipv6', (req, res) => {
+    res.send(localIPv6)
 })
 
 app.use(express.static(__dirname + '/site'))

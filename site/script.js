@@ -1,49 +1,42 @@
-localIP = '1.1.1.1'
+localIP = '0.0.0.0'
 wsPort = '3001'
-function loadFile(filePath) {
-    var result = null;
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", filePath, false);
-    xmlhttp.send();
-    if (xmlhttp.status == 200) {
-        result = xmlhttp.responseText;
-    }
-    return result;
-}
+socket = {}
+localIP = fetch(window.location.origin + '/api/ip').then(res => res.text()).then(text => {
+    localIP = text;
+    console.log(localIP);
+    // socket = io(`ws://pi-thomas.local:${wsPort}`);
+    socket = io(`ws://${localIP}:${wsPort}`);
+    socket.emit("set-name", nickname);
 
-localIP = loadFile('ip.txt').split('\n')[0];
+    form.addEventListener("submit", e => {
+        e.preventDefault();
+        const message = input.value
+        if (message != "") {
+            addElement(`You: ${message}`)
+            socket.emit("message", message)
+            input.value = ''
+        }
+    })
 
-const socket = io(`ws://${localIP}:${wsPort}`);
+    socket.on("connect", () => {
+        addElement(`You connected with nickname: ${nickname}`);
+        socket.emit("broadcast-name");
+    });
+
+    socket.on("client-connected", (data) => {
+        addElement(`New client '${data}' connected`);
+    });
+
+    socket.on("got-msg", (id, message) => {
+        addElement(`${id}: ${message}`);
+    })
+});
+
 localStorage.debug = 'socket.io-client:socket'
 const mC = document.getElementById("message-container");
 const input = document.getElementById("input");
 const form = document.getElementById("form");
-
 const nickname = prompt("Select name: ");
-socket.emit("set-name", nickname);
-
-form.addEventListener("submit", e => {
-    e.preventDefault();
-    const message = input.value
-    if (message != "") {
-        addElement(`You: ${message}`)
-        socket.emit("message", message)
-        input.value = ''
-    }
-})
-
-socket.on("connect", () => {
-    addElement(`You connected with nickname: ${nickname}`);
-    socket.emit("broadcast-name");
-});
-
-socket.on("client-connected", (data) => {
-    addElement(`New client '${data}' connected`);
-});
-
-socket.on("got-msg", (id, message) => {
-    addElement(`${id}: ${message}`);
-})
 
 function addElement(data) {
     para = document.createElement("p");
