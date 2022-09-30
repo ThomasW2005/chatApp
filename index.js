@@ -40,8 +40,8 @@ exec("ip addr | grep 'state UP' -A4 | tail -n1 | awk '{print $2}' | cut -f1 -d'/
         console.error(`exec error: ${error}`);
         return;
     }
-    localIP = stdout.trim()
-    console.log(`local ip: ${localIP}`)
+    localIPv6 = stdout.trim()
+    console.log(`local ipv6: ${localIP}`)
 });
 
 mdns.on('query', query => {
@@ -52,7 +52,7 @@ mdns.on('query', query => {
         if (query.questions[0].type === 'AAAA') {
             mdns.respond([{ name: 'htlchat.local', type: 'AAAA', data: localIPv6 }])
         }
-        // console.log(query)
+        console.log(query)
     }
 })
 

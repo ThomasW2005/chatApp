@@ -6,7 +6,7 @@
   "scripts": {
     "test": "node .",
     "stop": "pkill --signal SIGINT myApp"
-},
+  },
   "keywords": [
     "express",
     "socket.io",
@@ -16,7 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "@socket.io/admin-ui": "^0.2.0",
-    "express": "^4.17.2",
+    "express": "^4.18.1",
     "mdns-server": "^1.0.10",
     "multicast-dns": "^7.2.4",
     "npm": "^8.5.1",
