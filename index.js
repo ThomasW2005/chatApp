@@ -2,7 +2,7 @@ localIP = '0.0.0.0'
 localIPv6 = '0000::0000:0000:0000:0000'
 
 const wsPort = 3001
-const httpPort = 80
+const httpPort = 81
 const mdnsPort = 5353
 
 const { exec } = require("child_process");
