@@ -1,15 +1,10 @@
 body {
-  background-color: black;
+  background-color: cadetblue;
 }
 
 #message-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   padding-top: 30px;
 }
 
@@ -22,11 +17,9 @@ body {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   margin: 4px;
-  background-color: aquamarine;
+  background-color: white;
   border-radius: 7px;
   border-width: 1px;
   border-style: solid;
@@ -42,23 +35,57 @@ body {
 
 @-webkit-keyframes fadeIn {
   0% {
-    opacity: 0%;
+    opacity: 0;
   }
   100% {
-    opacity: 100%;
+    opacity: 1;
   }
 }
 
 @keyframes fadeIn {
   0% {
-    opacity: 0%;
+    opacity: 0;
   }
   100% {
-    opacity: 100%;
+    opacity: 1;
   }
 }
-
 .center {
   text-align: center;
 }
-/*# sourceMappingURL=style.css.map */
+
+.element {
+  border-radius: 8px;
+  background-color: white;
+  color: black;
+  border: 3px solid #555;
+}
+
+.button {
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  transition-duration: 0.25s;
+}
+
+.button:hover {
+  border: 3px solid black;
+}
+
+.button:active {
+  background-color: var(--bg-color);
+}
+
+input[type=text] {
+  border-radius: 8px;
+  outline: none;
+  transition-duration: 0.35s;
+  width: auto;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 3px solid #555;
+}
+
+input[type=text]:focus {
+  border: 3px solid black;
+}/*# sourceMappingURL=style.css.map */

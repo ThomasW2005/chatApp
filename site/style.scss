@@ -1,5 +1,5 @@
 body {
-    background-color: black;
+    background-color: cadetblue;
 }
 
 #message-container {
@@ -17,7 +17,7 @@ body {
     width: fit-content;
     display: flex;
     margin: 4px;
-    background-color: aquamarine;
+    background-color: white;
     border-radius: 7px;
     border-width: 1px;
     border-style: solid;
@@ -30,10 +30,54 @@ body {
 }
 
 @keyframes fadeIn {
-    0%   {opacity: 0%;}
-    100% {opacity: 100%;}
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 .center {
     text-align: center;
+}
+
+.element {
+    border-radius: 8px;
+    background-color: white;
+    color: black;
+    border: 3px solid #555;
+}
+
+.button {
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+
+    transition-duration: 0.25s;
+}
+
+.button:hover {
+    border: 3px solid black;
+}
+
+.button:active {
+    background-color: var(--bg-color);
+}
+
+input[type=text] {
+    border-radius: 8px;
+    outline: none;
+
+    transition-duration: 0.35s;
+
+    width: auto;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 3px solid #555;
+}
+
+input[type=text]:focus {
+    border: 3px solid black;
 }
